@@ -43,13 +43,13 @@ public class Case extends JPanel implements MouseListener {
                 gc.drawString("X", getWidth() / 2 - gc.getFont().getSize() / 2, getHeight() / 2 + gc.getFont().getSize() / 2);
             } else {
                 int minesAround = main.getChamp().nbMinesArond(x, y);
-                if (minesAround != 0) {
-                    gc.setColor(Color.BLUE);
-                    gc.drawString(String.valueOf(minesAround), getWidth() / 2 - gc.getFont().getSize() / 2, getHeight() / 2 + gc.getFont().getSize() / 2);
-                }
+                // Afficher le nombre de mines autour, y compris si ce nombre est 0
+                gc.setColor(Color.BLUE);
+                gc.drawString(String.valueOf(minesAround), getWidth() / 2 - gc.getFont().getSize() / 2, getHeight() / 2 + gc.getFont().getSize() / 2);
             }
         }
     }
+
 
     /**
      * Gère les événements de clic de souris sur la case.

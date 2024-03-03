@@ -87,9 +87,11 @@ public class Gui extends JPanel implements ActionListener {
         }
     }
 
+
     public void updateScore(int newScore) {
-        scoreLabel.setText("Score: " + newScore); // Mise à jour du texte du scoreLabel
+        scoreLabel.setText("Score: " + newScore); // Mettez à jour le texte du scoreLabel avec le nouveau score
     }
+
 
     public void setDifficulty(String difficulty) {
         difficultyComboBox.setSelectedItem(difficulty);

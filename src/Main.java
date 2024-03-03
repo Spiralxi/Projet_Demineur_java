@@ -100,6 +100,13 @@ public class Main extends JFrame {
         gui.repaint();
     }
 
+    public void applyTimeMultiplier() {
+        // Supposons un score de base multiplié par 10 pour l'exemple
+        if (elapsedTime < 300) {
+            score += (300 - elapsedTime) * 10; // Plus vite vous finissez, plus le score est élevé
+        }
+        gui.updateScore(score); // Mettez à jour le score dans l'interface utilisateur
+    }
 
 
 

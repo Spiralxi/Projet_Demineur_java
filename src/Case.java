@@ -70,6 +70,7 @@ public class Case extends JPanel implements MouseListener {
                 }
                 // Vérifier la victoire après la propagation
                 if (main.getChamp().hasWon()) {
+                    main.applyTimeMultiplier();
                     // Afficher la boîte de dialogue de victoire
                     JOptionPane.showMessageDialog(null, "Félicitations ! Vous avez gagné !", "Victoire", JOptionPane.INFORMATION_MESSAGE);
                     main.resetGame(); // Optionnel: Réinitialiser le jeu après la victoire

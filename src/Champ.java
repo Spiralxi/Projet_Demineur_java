@@ -95,4 +95,35 @@ public class Champ {
     void setClicked(int x, int y) {
         clickedCells[x][y] = true;
     }
+
+    public void revealAdjacentCells(int x, int y) {
+        // Vérifie les limites du tableau pour s'assurer que les coordonnées sont valides
+        if (x < 0 || x >= DIM || y < 0 || y >= DIM) return;
+
+
+        // Arrête si la case a déjà été cliquée ou si c'est une mine
+        if (clickedCells[x][y] || isMine(x, y)) return;
+
+
+        // Marque la case comme cliquée
+        clickedCells[x][y] = true;
+
+        // Obtient le nombre de mines autour de la case
+        int minesAround = nbMinesArond(x, y);
+
+        // Si la case n'a pas de mines autour, elle révèle récursivement les cases adjacentes
+        if (minesAround == 0) {
+            for (int i = x - 1; i <= x + 1; i++) {
+                for (int j = y - 1; j <= y + 1; j++) {
+                    // Évite de vérifier la case elle-même dans la récursion
+                    if (i == x && j == y) continue;
+                    // Appel récursif pour révéler les cases adjacentes
+                    revealAdjacentCells(i, j);
+                }
+            }
+        }
+    }
+
+
+
 }

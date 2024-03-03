@@ -25,6 +25,9 @@ public class Gui extends JPanel implements ActionListener {
         panelNorth.add(timerLabel); // Ajouter le timerLabel au panel du nord
         panelNorth.add(scoreLabel); // Ajouter le scoreLabel au panel du nord
         panelNorth.add(difficultyComboBox); // Ajouter le JComboBox pour la difficulté au panel du nord
+        // Ajoutez un peu d'espace autour du panelNorth et panelSouth
+        panelNorth.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panelSouth.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         add(panelNorth, BorderLayout.NORTH);
         add(panelSouth, BorderLayout.SOUTH);
@@ -38,6 +41,18 @@ public class Gui extends JPanel implements ActionListener {
 
         quitButton.addActionListener(this);
         panelSouth.add(quitButton);
+
+        // Dans le constructeur Gui(Main main, JLabel timerLabel, int score)
+        newGameButton.setBackground(new Color(120, 180, 250));
+        newGameButton.setForeground(Color.WHITE);
+        newGameButton.setFont(new Font("Arial", Font.BOLD, 12));
+
+        quitButton.setBackground(new Color(250, 120, 120));
+        quitButton.setForeground(Color.WHITE);
+        quitButton.setFont(new Font("Arial", Font.BOLD, 12));
+
+        difficultyComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
+
 
         // Listener pour la sélection de la difficulté
         difficultyComboBox.addActionListener(new ActionListener() {

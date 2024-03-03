@@ -32,6 +32,8 @@ public class Main extends JFrame {
         add(gui);
 
         pack();
+        setSize(400, 500); // Ajustez la taille selon vos besoins
+        setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -92,6 +94,13 @@ public class Main extends JFrame {
             gui.setDifficulty(difficulty); // Mettre à jour le JComboBox avec la nouvelle difficulté
         }
     }
+
+    public void refreshGui() {
+        gui.validate();
+        gui.repaint();
+    }
+
+
 
 
 }

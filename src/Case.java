@@ -24,6 +24,8 @@ public class Case extends JPanel implements MouseListener {
         this.y = y;
         setPreferredSize(new Dimension(DIMPIX, DIMPIX));
         setBackground(Color.DARK_GRAY);
+        setBackground(Color.GRAY); // Couleur par défaut plus neutre
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         addMouseListener(this);
     }
@@ -40,6 +42,7 @@ public class Case extends JPanel implements MouseListener {
             gc.fillRect(2, 2, getWidth() - 4, getHeight() - 4);
             if (main.getChamp().isMine(x, y)) {
                 gc.setColor(Color.RED);
+                setBackground(Color.RED); // Case avec mine
                 gc.drawString("X", getWidth() / 2 - gc.getFont().getSize() / 2, getHeight() / 2 + gc.getFont().getSize() / 2);
             } else {
                 int minesAround = main.getChamp().nbMinesArond(x, y);
@@ -61,18 +64,27 @@ public class Case extends JPanel implements MouseListener {
         if (!clicked) {
             clicked = true;
             main.getChamp().setClicked(x, y);
-            if (main.getChamp().isMine(x, y)) {
+            if (!main.getChamp().isMine(x, y)) {
+                if (main.getChamp().nbMinesArond(x, y) == 0) {
+                    main.getChamp().revealAdjacentCells(x, y);
+                }
+                // Vérifier la victoire après la propagation
+                if (main.getChamp().hasWon()) {
+                    // Afficher la boîte de dialogue de victoire
+                    JOptionPane.showMessageDialog(null, "Félicitations ! Vous avez gagné !", "Victoire", JOptionPane.INFORMATION_MESSAGE);
+                    main.resetGame(); // Optionnel: Réinitialiser le jeu après la victoire
+                }
+            } else {
                 JOptionPane.showMessageDialog(null, "Vous avez perdu !", "Fin de la partie", JOptionPane.ERROR_MESSAGE);
                 main.resetGame(); // Réinitialiser le jeu
-            } else {
-                repaint();
-                if (main.getChamp().hasWon()) {
-                    JOptionPane.showMessageDialog(null, "Félicitations, vous avez gagné !", "Victoire", JOptionPane.INFORMATION_MESSAGE);
-                    main.resetGame(); // Réinitialiser le jeu
-                }
             }
+            repaint();
+            main.refreshGui(); // Rafraîchit l'interface utilisateur après la mise à jour
         }
     }
+
+
+
 
     // Méthodes de MouseListener non utilisées mais requises par l'interface
     @Override
